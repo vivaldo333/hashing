@@ -1,22 +1,22 @@
 version: '3.3'
 
 services:
-  db:
+  db1:
     #    image: mysql:5.7
     restart: always
-    container_name: db
+    container_name: db1
     build:
       context: ./Docker
       dockerfile: db.Dockerfile
     ports:
       - 3306:3306
-    networks:
-      - mt-network
+#    networks:
+#      - mt-network
     environment:
       - MYSQL_ROOT_PASSWORD=root
       - MYSQL_USER=user
       - MYSQL_PASSWORD=resu
-      - MYSQL_DATABASE=ksdb
+      - MYSQL_DATABASE=KS
 
   app:
     build:
@@ -25,13 +25,15 @@ services:
     ports:
       - "8080:8080"
     links:
-      - db:db
+      - db1:db1
     container_name: app
     depends_on:
-        - db
-    networks:
-      - mt-network
+        - db1
+#    networks:
+#      - mt-network
+    environment:
+      - JAVA_TOOL_OPTIONS=-Xms1024M -Xmx8192M
 
-networks:
-  mt-network:
-    driver: bridge
+#networks:
+#  mt-network:
+#    driver: bridge
