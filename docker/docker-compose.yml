@@ -2,13 +2,12 @@ version: '3.3'
 
 services:
   db:
-    image: mysql:5.7
-    command: mysqld --user=root
+    #    image: mysql:5.7
     restart: always
     container_name: db
     build:
-      context: .
-      dockerfile: Dockerfile
+      context: ./Docker
+      dockerfile: db.Dockerfile
     ports:
       - 3306:3306
     networks:
@@ -18,6 +17,20 @@ services:
       - MYSQL_USER=user
       - MYSQL_PASSWORD=resu
       - MYSQL_DATABASE=ksdb
+
+  app:
+    build:
+      context: ./Docker
+      dockerfile: app.Dockerfile
+    ports:
+      - "8080:8080"
+    links:
+      - db:db
+    container_name: app
+    depends_on:
+        - db
+    networks:
+      - mt-network
 
 networks:
   mt-network:

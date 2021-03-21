@@ -36,6 +36,7 @@ public class SpringJdbcConfig {
         return dataSource;
     }
 
+    /*In-memory DB*/
     @Primary
     @Bean(name = "dataSource")
     @Profile("dev")
@@ -48,6 +49,7 @@ public class SpringJdbcConfig {
                 .build();
     }
 
+    /*Docker MySql DB*/
     /*@Primary
     @Bean(name = "dataSource")
     @Profile("dev")

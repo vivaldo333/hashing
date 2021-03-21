@@ -11,7 +11,8 @@
 	<groupId>com.ks</groupId>
 	<artifactId>hashing</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>war</packaging>
+	<!--<packaging>war</packaging>-->
+	<packaging>jar</packaging>
 	<name>hashing</name>
 	<description>Hashing and unhashing cellphones</description>
 
@@ -147,7 +148,8 @@
 			</activation>
 			<properties>
 				<activatedProperties>prod</activatedProperties>
-				<packaging.type>war</packaging.type>
+				<!--<packaging.type>war</packaging.type>-->
+				<packaging.type>jar</packaging.type>
 			</properties>
 			<dependencies>
 				<dependency>
@@ -189,7 +191,8 @@
 			</activation>
 			<properties>
 				<activatedProperties>dev</activatedProperties>
-				<packaging.type>war</packaging.type>
+				<!--<packaging.type>war</packaging.type>-->
+				<packaging.type>jar</packaging.type>
 			</properties>
 			<dependencies>
 				<dependency>

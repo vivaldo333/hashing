@@ -1,16 +1,19 @@
 package com.ks.hashing;
 
+import org.junit.jupiter.api.Disabled;
+
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 
+@Disabled
 public class GenerateInitDataSql {
     private static final String NEW_LINE_SEPARATOR = System.getProperty("line.separator");
 
     public static void main(String[] args) throws IOException {
         System.out.println("Start setup.sql creating");
-        String absoluteFilePath = "D:\\ITEA\\_PROJECT\\hashing\\src\\main\\resources\\sql\\init-data.sql";
+        String absoluteFilePath = "D:\\ITEA\\_PROJECT\\hashing\\docker\\Docker\\setup.sql";
         long initPhoneNumber = 380000000000L;
         int countOfRowsInDb = 50_000_000;
         int chunkSize = 5_000_000;
