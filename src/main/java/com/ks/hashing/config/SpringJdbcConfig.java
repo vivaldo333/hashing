@@ -19,7 +19,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 import javax.sql.DataSource;
 
 @Configuration
-@ComponentScan("package com.ks.hashing")
+@ComponentScan("com.ks.hashing")
 @EnableTransactionManagement
 public class SpringJdbcConfig {
 
