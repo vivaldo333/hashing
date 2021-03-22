@@ -50,11 +50,11 @@ public class SpringJdbcConfig {
     }
 
     /*Docker MySql DB*/
-    /*@Primary
+    @Primary
     @Bean(name = "dataSource")
-    @Profile("dev")
+    @Profile("!dev")
     @ConfigurationProperties(prefix = "spring.datasource")
-    public DataSource dataSource() {
+    public DataSource dataSourceMySql() {
         //DriverManagerDataSource dataSource = new DriverManagerDataSource();
         //dataSource.setDriverClassName("com.mysql.cj.jdbc.Driver");
         //dataSource.setUrl("jdbc:mysql://localhost:3306/ksdb?serverTimezone=UTC");
@@ -64,12 +64,12 @@ public class SpringJdbcConfig {
         return DataSourceBuilder.create().build();
     }
 
-    @Bean(name = "transactionManager")
     @Primary
+    @Bean(name = "transactionManager")
+    @Profile("!dev")
     PlatformTransactionManager transactionManager(@Qualifier("dataSource") DataSource datasource) {
-        PlatformTransactionManager transactionManager = new JdbcTransactionManager(datasource); // DataSourceTransactionManager,
-        return transactionManager;
-    }*/
+        return new JdbcTransactionManager(datasource); // DataSourceTransactionManager
+    }
 
     @Bean
     public JdbcTemplate jdbcTemplate(@Qualifier("dataSource") DataSource dataSource) {

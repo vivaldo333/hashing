@@ -34,7 +34,7 @@ build/
 .vscode/
 
 logs/
-setup.sql
+#setup.sql
 source-sql/
 
 .mvn
