@@ -19,14 +19,14 @@ services:
       - MYSQL_DATABASE=KS
 
   app:
+    container_name: app
     build:
       context: ./Docker
       dockerfile: app.Dockerfile
     ports:
-      - "8080:8080"
+      - 8080:8080
     links:
       - db1:db1
-    container_name: app
     depends_on:
         - db1
 #    networks:

@@ -2,10 +2,10 @@ Aplication description:
 1) Application start-up:
     1.1) with hsqldb in-memory db:
         For that it is necessary to leave bean "dataSource" with EmbeddedDatabaseBuilder implementation in SpringJdbcConfig class
-        (set @Profile("dev", for other implementations @Profile("!dev")
+        (set @Profile("dev") for other implementations EmbeddedDatabaseBuilder and @Profile("!dev") for implementation DataSourceBuilder)
         Command:
         mvn spring-boot:run -Dspring-boot.run.profiles=dev
-    1.2) with Docker MySql DB (temporary not working - "ECONNREFUSED localhost:8080" error)
+    1.2) with Docker MySql DB
         For that it is necessary to do next:
          - leave bean "dataSource" with DataSourceBuilder.create().build() implementation and "transactionManager" bean in SpringJdbcConfig class;
          - build .jar file
@@ -19,7 +19,6 @@ Aplication description:
 2) Unit tests (works only with "dataSource" bean with EmbeddedDatabaseBuilder implementation)
    Command:
    mvn clean test -Pdev -DprofileIdEnabled=true
-    ● шаги для запуска тестов
 3) API/Endpoints description:
     3.1) get hash code by phone number:
     GET http://127.0.0.1:8080/api/phones/380000000001/hashes
@@ -52,3 +51,17 @@ Aplication description:
     By default:
         hash.algorithm=SHA-256
         hash.salt=AAA111
+
+    4.2) Binding "localhost:8080" in Docker Tool Box for Windows Home 10
+        If you are using Docker Tool Box for Windows Home 10 then "localhost:8080" throws error "ECONNREFUSED"
+        because Docker Tool Box binds host on other host - for my local Window it is 192.168.99.100
+        Commands for get host:
+        docker machine ls
+
+        NAME      ACTIVE   DRIVER       STATE     URL                         SWARM   DOCKER     ERRORS
+        default   *        virtualbox   Running   tcp://192.168.99.100:2376           v18.09.7
+        or
+        docker-machine ip
+        192.168.99.100
+
+        curl -H "Authentification: Basic user:resu" http://192.168.99.100:8080/api/phones/380000000001/hashes
