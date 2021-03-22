@@ -39,7 +39,7 @@ public class SpringJdbcConfig {
     /*In-memory DB*/
     @Primary
     @Bean(name = "dataSource")
-    @Profile("!dev")
+    @Profile("dev")
     public DataSource dataSource() {
         return new EmbeddedDatabaseBuilder()
                 .setType(EmbeddedDatabaseType.HSQL)
@@ -52,7 +52,7 @@ public class SpringJdbcConfig {
     /*Docker MySql DB*/
     @Primary
     @Bean(name = "dataSource")
-    @Profile("dev")
+    @Profile("!dev")
     @ConfigurationProperties(prefix = "spring.datasource")
     public DataSource dataSourceMySql() {
         //DriverManagerDataSource dataSource = new DriverManagerDataSource();
@@ -66,7 +66,7 @@ public class SpringJdbcConfig {
 
     @Primary
     @Bean(name = "transactionManager")
-    @Profile("dev")
+    @Profile("!dev")
     PlatformTransactionManager transactionManager(@Qualifier("dataSource") DataSource datasource) {
         return new JdbcTransactionManager(datasource); // DataSourceTransactionManager
     }
